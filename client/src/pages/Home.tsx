@@ -32,7 +32,6 @@ const assets = {
   data: "/manus-storage/vanessa-reajuste-dados_d9397d50.jpg",
   consult: "/manus-storage/vanessa-conversa-acolhedora_d97e121d.jpg",
   pattern: "/manus-storage/vanessa-pattern-abstrato_bc1bf2da.png",
-  headerSeal: "/manus-storage/vanessa-favicon-motif_e306e033.png",
 };
 
 const years = Array.from({ length: 28 }, (_, index) => new Date().getFullYear() - index);
@@ -160,7 +159,6 @@ export default function Home() {
             onClick={() => scrollTo("inicio")}
           >
             <img className="brand-logo" src={assets.stackedLogo} alt="Vanessa Matos Advocacia" />
-            <img className="brand-seal" src={assets.headerSeal} alt="" aria-hidden="true" />
           </button>
 
           <nav className="hidden items-center gap-7 lg:flex" aria-label="Navegação principal">

@@ -57,9 +57,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .site-container { width: min(1280px, calc(100% - 48px)); margin: 0 auto; }
 .site-shell { font-size: 16px; }
 .site-header { position: absolute; z-index: 30; top: 0; left: 0; width: 100%; padding: 20px 0; border-bottom: 1px solid rgba(193,216,224,.18); background: linear-gradient(180deg, rgba(5,7,7,.8), rgba(5,7,7,.1)); }
-.brand-lockup { display: flex; align-items: center; gap: 16px; max-width: 360px; border: 0; background: none; padding: 0; }
+.brand-lockup { display: flex; align-items: center; max-width: 360px; border: 0; background: none; padding: 0; }
 .brand-logo { width: min(281px, 52vw); height: auto; object-fit: contain; }
-.brand-seal { width: 31px; height: 31px; object-fit: contain; opacity: .92; }
 .nav-link { border: 0; background: none; color: rgba(255,255,255,.74); font-size: 12px; letter-spacing: .05em; transition: color 160ms var(--ease-out); }
 .nav-link:hover { color: #fff; }
 .header-cta, .primary-button { display: inline-flex; align-items: center; justify-content: center; gap: 11px; border: 1px solid #7fa0ac; background: #7fa0ac; color: #111a1c; padding: 12px 17px; font-size: 12px; font-weight: 700; letter-spacing: .035em; transition: transform 160ms var(--ease-out), background 160ms var(--ease-out), border-color 160ms var(--ease-out); }
@@ -239,7 +238,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 @media (max-width: 670px) {
   .site-container { width: min(100% - 34px, 1280px); }
   .site-header { padding: 17px 0; }
-  .brand-lockup { max-width: 250px; gap: 8px; }
+  .brand-lockup { max-width: 250px; }
   .brand-logo { width: 210px; }
   .brand-seal { width: 23px; height: 23px; }
   .hero-section { min-height: 770px; align-items: flex-start; }

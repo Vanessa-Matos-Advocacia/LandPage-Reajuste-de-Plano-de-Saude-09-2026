@@ -1,5 +1,8 @@
 # Revisão de padrão institucional — Vanessa Matos Advocacia
 
+- [x] Localizar a imagem indicada pela edição visual e removê-la da composição.
+- [x] Conferir o impacto da remoção em desktop e registrar o checkpoint atualizado.
+
 - [x] Avaliar a página atual em desktop e mobile, com foco em clareza, legibilidade, acessibilidade e confiança institucional.
 - [x] Revisar a linguagem da página para comunicação jurídica sóbria, evitando promessas, ambiguidades e tom publicitário excessivo.
 - [x] Substituir interações provisórias por fluxos de contato claros e tratados com transparência.
