@@ -34,9 +34,16 @@ const assets = {
   pattern: "/manus-storage/vanessa-pattern-abstrato_bc1bf2da.png",
 };
 
-const whatsappUrl = `https://wa.me/5571991507390?text=${encodeURIComponent(
-  "Olá Dra. Vanessa, acabei de verificar que posso ter direito à restituição de valores do plano de saúde, poderia me ajudar?"
-)}`;
+const whatsappMessage = "Olá Dra. Vanessa, acabei de verificar que posso ter direito à restituição de valores do plano de saúde, poderia me ajudar?";
+const createWhatsAppUrl = (message: string) => `https://wa.me/5571991507390?text=${encodeURIComponent(message)}`;
+const whatsappUrl = createWhatsAppUrl(whatsappMessage);
+
+const planoLabels: Record<string, string> = {
+  individual: "Individual",
+  familiar: "Familiar",
+  adesao: "Coletivo por adesão",
+  empresarial: "Empresarial / CNPJ",
+};
 
 const years = Array.from({ length: 28 }, (_, index) => new Date().getFullYear() - index);
 
@@ -102,6 +109,29 @@ export default function Home() {
 
   const formattedInitial = useMemo(() => parseMoney(mensalidadeInicial), [mensalidadeInicial]);
   const formattedCurrent = useMemo(() => parseMoney(mensalidadeAtual), [mensalidadeAtual]);
+  const triageWhatsAppUrl = useMemo(() => {
+    if (!result) return whatsappUrl;
+
+    const currency = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+    const estimatedRate = result.annualRate
+      ? `${result.annualRate.toFixed(1).replace(".", ",")}% ao ano`
+      : "não identificada apenas pelos valores informados";
+    const summary = [
+      whatsappMessage,
+      "",
+      "Resumo da minha triagem:",
+      `• Tipo de plano: ${planoLabels[tipoPlano] ?? "Não informado"}`,
+      `• Ano de início do contrato: ${anoInicio || "Não informado"}`,
+      `• Mensalidade no início: ${formattedInitial ? currency.format(formattedInitial) : "Não informada"}`,
+      `• Mensalidade atual: ${formattedCurrent ? currency.format(formattedCurrent) : "Não informada"}`,
+      `• Resultado informativo: ${result.heading}`,
+      `• Variação média estimada: ${estimatedRate}`,
+      "",
+      "Se possível, gostaria de saber quais documentos devo separar para uma avaliação individual.",
+    ].join("\n");
+
+    return createWhatsAppUrl(summary);
+  }, [anoInicio, formattedCurrent, formattedInitial, result, tipoPlano]);
 
   const handleTriage = () => {
     if (!tipoPlano || !anoInicio || !formattedInitial || !formattedCurrent || !consent) {
@@ -290,7 +320,7 @@ export default function Home() {
                 <div className="result-topline"><span>Resultado de referência</span><strong>{result.annualRate ? `${result.annualRate.toFixed(1).replace(".", ",")}% a.a.` : "Histórico informado"}</strong></div>
                 <h4>{result.heading}</h4>
                 <p>{result.message}</p>
-                <a className="result-link" href={whatsappUrl} target="_blank" rel="noreferrer">Falar sobre este resultado <ArrowUpRightIcon /></a>
+                <a className="result-link" href={triageWhatsAppUrl} target="_blank" rel="noreferrer">Enviar minha triagem pelo WhatsApp <ArrowUpRightIcon /></a>
               </div>
             )}
           </div>

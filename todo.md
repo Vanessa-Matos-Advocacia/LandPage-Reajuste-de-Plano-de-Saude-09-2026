@@ -1,5 +1,8 @@
 # Revisão de padrão institucional — Vanessa Matos Advocacia
 
+- [x] Gerar um resumo de triagem com os campos preenchidos e o resultado informativo.
+- [x] Vincular o resumo ao botão de WhatsApp após a triagem e validar a experiência.
+
 - [x] Inserir botões de WhatsApp com mensagem pré-preenchida nos principais CTAs.
 - [x] Conferir o destino do link, a responsividade e registrar a versão atualizada.
 
