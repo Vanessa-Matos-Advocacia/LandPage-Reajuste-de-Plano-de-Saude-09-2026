@@ -1,5 +1,8 @@
 # Revisão de padrão institucional — Vanessa Matos Advocacia
 
+- [ ] Criar o repositório privado LandPage Reajuste de Planos de Saúde 2026 no GitHub, sem CI ou workflows.
+- [ ] Enviar somente o código atual e confirmar o endereço remoto.
+
 - [x] Gerar um resumo de triagem com os campos preenchidos e o resultado informativo.
 - [x] Vincular o resumo ao botão de WhatsApp após a triagem e validar a experiência.
 
