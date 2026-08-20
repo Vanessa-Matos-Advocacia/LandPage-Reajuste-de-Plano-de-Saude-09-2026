@@ -98,7 +98,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .hero-index div { width: min(335px, 30vw); height: 1px; background: rgba(255,255,255,.25); }
 
 .triage-section { position: relative; background: #eaeff1; color: #273033; padding: 118px 0 115px; overflow: hidden; }
-.triage-section::before { content: ""; position: absolute; width: 570px; height: 570px; right: -145px; top: -200px; background: url('/manus-storage/vanessa-pattern-abstrato_bc1bf2da.png') center/contain no-repeat; opacity: .18; }
+.triage-section::before { content: ""; position: absolute; width: 570px; height: 570px; right: -145px; top: -200px; background: linear-gradient(45deg, transparent 48%, rgba(127,160,172,.35) 49%, transparent 50%), linear-gradient(-45deg, transparent 48%, rgba(127,160,172,.22) 49%, transparent 50%); background-size: 190px 190px; opacity: .18; }
 .triage-layout { position: relative; display: grid; grid-template-columns: .87fr 1.13fr; gap: clamp(45px, 7vw, 115px); align-items: start; }
 .section-number { display: flex; gap: 11px; align-items: baseline; font-size: 11px; color: #5a605e; letter-spacing: .12em; font-weight: 700; }
 .section-number span { text-transform: uppercase; letter-spacing: .1em; font-size: 10px; font-weight: 600; }

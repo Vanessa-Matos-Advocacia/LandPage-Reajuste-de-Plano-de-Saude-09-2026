@@ -206,6 +206,7 @@ function vitePluginStorageProxy(): Plugin {
 const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector(), vitePluginStorageProxy()];
 
 export default defineConfig({
+  base: process.env.GITHUB_ACTIONS ? "/LandPage-Reajuste-de-Plano-de-Saude-09-2026/" : "/",
   plugins,
   resolve: {
     alias: {

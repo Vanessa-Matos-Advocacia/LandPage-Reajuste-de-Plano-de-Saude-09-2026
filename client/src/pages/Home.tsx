@@ -24,14 +24,15 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 
+const publicAsset = (file: string) => `${import.meta.env.BASE_URL}assets/${file}`;
+
 const assets = {
-  logo: "/manus-storage/vanessa-matos-logo-negativo_63f4e01b.png",
-  stackedLogo: "/manus-storage/vanessa-matos-logo-empilhado-negativo_d24c290c.png",
-  officialSymbol: "/manus-storage/vanessa-matos-simbolo-positivo_02e085da.webp",
-  hero: "/manus-storage/vanessa-hero-saude-juridico_1b10ff35.jpg",
-  data: "/manus-storage/vanessa-reajuste-dados_d9397d50.jpg",
-  consult: "/manus-storage/vanessa-conversa-acolhedora_d97e121d.jpg",
-  pattern: "/manus-storage/vanessa-pattern-abstrato_bc1bf2da.png",
+  logo: publicAsset("vanessa-logo.png"),
+  stackedLogo: publicAsset("vanessa-logo-stacked.png"),
+  officialSymbol: publicAsset("vanessa-symbol.svg"),
+  hero: publicAsset("vanessa-hero.jpeg"),
+  data: publicAsset("vanessa-data.jpeg"),
+  consult: publicAsset("vanessa-consult.png"),
 };
 
 const whatsappMessage = "Olá Dra. Vanessa, acabei de verificar que posso ter direito à restituição de valores do plano de saúde, poderia me ajudar?";
