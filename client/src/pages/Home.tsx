@@ -34,6 +34,10 @@ const assets = {
   pattern: "/manus-storage/vanessa-pattern-abstrato_bc1bf2da.png",
 };
 
+const whatsappUrl = `https://wa.me/5571991507390?text=${encodeURIComponent(
+  "Olá Dra. Vanessa, acabei de verificar que posso ter direito à restituição de valores do plano de saúde, poderia me ajudar?"
+)}`;
+
 const years = Array.from({ length: 28 }, (_, index) => new Date().getFullYear() - index);
 
 const faqs = [
@@ -167,9 +171,9 @@ export default function Home() {
             <button className="nav-link" onClick={() => scrollTo("duvidas")}>Dúvidas frequentes</button>
           </nav>
 
-          <button className="header-cta hidden sm:inline-flex" onClick={() => scrollTo("triagem")}>
-            Fazer a triagem <ArrowUpRightIcon />
-          </button>
+          <a className="header-cta hidden sm:inline-flex" href={whatsappUrl} target="_blank" rel="noreferrer">
+            Entrar em contato <ArrowUpRightIcon />
+          </a>
           <button
             className="mobile-menu-button lg:hidden"
             aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
@@ -184,7 +188,7 @@ export default function Home() {
             <button onClick={() => { setMenuOpen(false); scrollTo("entenda"); }}>Entenda o cenário</button>
             <button onClick={() => { setMenuOpen(false); scrollTo("triagem"); }}>Faça a triagem</button>
             <button onClick={() => { setMenuOpen(false); scrollTo("duvidas"); }}>Dúvidas frequentes</button>
-            <button onClick={() => { setMenuOpen(false); scrollTo("triagem"); }}>Fazer a triagem</button>
+            <a href={whatsappUrl} target="_blank" rel="noreferrer" onClick={() => setMenuOpen(false)}>Entrar em contato pelo WhatsApp</a>
           </nav>
         )}
       </header>
@@ -207,9 +211,9 @@ export default function Home() {
               <button className="primary-button" onClick={() => scrollTo("triagem")}>
                 Verificar meu reajuste <ArrowRight size={17} />
               </button>
-              <button className="text-button" onClick={() => scrollTo("documentos")}>
-                Ver documentos úteis <ArrowDownRight size={17} />
-              </button>
+              <a className="text-button" href={whatsappUrl} target="_blank" rel="noreferrer">
+                Falar com a Dra. Vanessa <ArrowUpRightIcon />
+              </a>
             </div>
           </div>
 
@@ -217,7 +221,7 @@ export default function Home() {
             <div className="note-symbol"><HeartPulse size={23} strokeWidth={1.45} /></div>
             <p className="note-kicker">Decisões importantes pedem contexto.</p>
             <p className="note-copy">A primeira etapa é entender o histórico com calma, sem promessas e sem decisões automatizadas.</p>
-            <button onClick={() => scrollTo("triagem")} className="note-link">Começar pela triagem <ChevronRight size={15} /></button>
+            <a href={whatsappUrl} target="_blank" rel="noreferrer" className="note-link">Falar pelo WhatsApp <ChevronRight size={15} /></a>
           </aside>
         </div>
         <div className="hero-index site-container" aria-hidden="true"><span>01</span><div /><span>REAJUSTE DE PLANO DE SAÚDE</span></div>
@@ -286,7 +290,7 @@ export default function Home() {
                 <div className="result-topline"><span>Resultado de referência</span><strong>{result.annualRate ? `${result.annualRate.toFixed(1).replace(".", ",")}% a.a.` : "Histórico informado"}</strong></div>
                 <h4>{result.heading}</h4>
                 <p>{result.message}</p>
-                <button className="result-link" onClick={() => scrollTo("documentos")}>Ver documentos que ajudam na análise <ArrowRight size={15} /></button>
+                <a className="result-link" href={whatsappUrl} target="_blank" rel="noreferrer">Falar sobre este resultado <ArrowUpRightIcon /></a>
               </div>
             )}
           </div>
@@ -363,7 +367,7 @@ export default function Home() {
             <div className="section-number">05 <span>Perguntas frequentes</span></div>
             <h2>Informação para você decidir com mais clareza.</h2>
             <p>Reunimos dúvidas que costumam surgir antes de uma análise. Cada resposta é geral; os detalhes dependem do contrato e da situação vivida por cada família.</p>
-            <button className="text-button text-button-dark" onClick={() => scrollTo("triagem")}>Revisar meus dados na triagem <ArrowRight size={16} /></button>
+            <a className="text-button text-button-dark" href={whatsappUrl} target="_blank" rel="noreferrer">Tirar uma dúvida no WhatsApp <ArrowUpRightIcon /></a>
           </div>
           <Accordion type="single" collapsible className="faq-accordion">
             {faqs.map((faq, index) => (
@@ -384,8 +388,8 @@ export default function Home() {
           <h2>Seu caso merece ser compreendido antes de qualquer decisão.</h2>
           <p>Organize suas informações, entenda os pontos que podem ser avaliados e prepare seu histórico para uma conversa jurídica individual, quando decidir avançar.</p>
           <div className="hero-actions">
-            <button className="primary-button primary-button-light" onClick={() => scrollTo("documentos")}>Organizar documentos <ArrowRight size={17} /></button>
-            <button className="text-button text-button-light" onClick={() => scrollTo("triagem")}>Fazer a triagem <ArrowUpRightIcon /></button>
+            <a className="primary-button primary-button-light" href={whatsappUrl} target="_blank" rel="noreferrer">Falar pelo WhatsApp <ArrowUpRightIcon /></a>
+            <button className="text-button text-button-light" onClick={() => scrollTo("triagem")}>Refazer a triagem <ArrowUpRightIcon /></button>
           </div>
         </div>
       </section>

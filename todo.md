@@ -1,5 +1,8 @@
 # Revisão de padrão institucional — Vanessa Matos Advocacia
 
+- [x] Inserir botões de WhatsApp com mensagem pré-preenchida nos principais CTAs.
+- [x] Conferir o destino do link, a responsividade e registrar a versão atualizada.
+
 - [x] Localizar a imagem indicada pela edição visual e removê-la da composição.
 - [x] Conferir o impacto da remoção em desktop e registrar o checkpoint atualizado.
 

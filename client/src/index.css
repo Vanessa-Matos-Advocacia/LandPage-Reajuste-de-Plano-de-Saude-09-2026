@@ -61,13 +61,13 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .brand-logo { width: min(281px, 52vw); height: auto; object-fit: contain; }
 .nav-link { border: 0; background: none; color: rgba(255,255,255,.74); font-size: 12px; letter-spacing: .05em; transition: color 160ms var(--ease-out); }
 .nav-link:hover { color: #fff; }
-.header-cta, .primary-button { display: inline-flex; align-items: center; justify-content: center; gap: 11px; border: 1px solid #7fa0ac; background: #7fa0ac; color: #111a1c; padding: 12px 17px; font-size: 12px; font-weight: 700; letter-spacing: .035em; transition: transform 160ms var(--ease-out), background 160ms var(--ease-out), border-color 160ms var(--ease-out); }
+.header-cta, .primary-button { display: inline-flex; align-items: center; justify-content: center; gap: 11px; border: 1px solid #7fa0ac; background: #7fa0ac; color: #111a1c; padding: 12px 17px; font-size: 12px; font-weight: 700; letter-spacing: .035em; text-decoration: none; transition: transform 160ms var(--ease-out), background 160ms var(--ease-out), border-color 160ms var(--ease-out); }
 .header-cta { padding: 11px 15px; }
 .header-cta:hover, .primary-button:hover { transform: translateY(-2px); background: #aac0c8; border-color: #aac0c8; }
 .header-cta:active, .primary-button:active { transform: scale(.97); }
 .mobile-menu-button { display: grid; place-items: center; width: 39px; height: 39px; border: 1px solid rgba(255,255,255,.2); background: rgba(0,0,0,.18); color: white; }
 .mobile-nav { display: grid; gap: 3px; padding-top: 17px; padding-bottom: 4px; }
-.mobile-nav button { border: 0; background: rgba(255,255,255,.08); color: white; text-align: left; padding: 13px 14px; font-size: 13px; }
+.mobile-nav button, .mobile-nav a { border: 0; background: rgba(255,255,255,.08); color: white; text-align: left; padding: 13px 14px; font-size: 13px; text-decoration: none; }
 
 .hero-section { position: relative; min-height: 796px; display: flex; align-items: center; overflow: hidden; isolation: isolate; }
 .hero-image { position: absolute; inset: 0; z-index: -3; background-position: center; background-size: cover; filter: grayscale(.8) saturate(.35) contrast(1.13); }
@@ -86,14 +86,14 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .hero-intro { max-width: 665px; margin: 31px 0 0; color: rgba(255,255,255,.76); font-size: 17px; line-height: 1.75; }
 .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 24px; margin-top: 39px; }
 .primary-button { min-height: 49px; padding: 14px 18px; }
-.text-button { display: inline-flex; align-items: center; gap: 9px; border: 0; background: transparent; color: #d4dfe3; padding: 0; font-size: 13px; font-weight: 600; transition: color 160ms var(--ease-out), transform 160ms var(--ease-out); }
+.text-button { display: inline-flex; align-items: center; gap: 9px; border: 0; background: transparent; color: #d4dfe3; padding: 0; font-size: 13px; font-weight: 600; text-decoration: none; transition: color 160ms var(--ease-out), transform 160ms var(--ease-out); }
 .text-button:hover { color: #fff; transform: translateX(3px); }
 .hero-note { position: relative; max-width: 345px; justify-self: end; border: 1px solid rgba(200,220,226,.21); background: rgba(8,12,13,.54); padding: 27px 28px 25px; backdrop-filter: blur(12px); }
 .hero-note::before { content: ""; position: absolute; inset: 8px; border: 1px solid rgba(127,160,172,.17); pointer-events: none; }
 .note-symbol { position: relative; display: grid; place-items: center; width: 42px; height: 42px; color: #c9dce3; border: 1px solid rgba(127,160,172,.5); }
 .note-kicker { position: relative; margin: 24px 0 0; color: white; font-size: 13px; font-weight: 700; }
 .note-copy { position: relative; margin: 10px 0 22px; color: rgba(255,255,255,.68); font-size: 13px; line-height: 1.65; }
-.note-link { position: relative; display: inline-flex; align-items: center; gap: 4px; border: 0; background: none; padding: 0; color: #9ebdc8; font-size: 12px; font-weight: 600; }
+.note-link { position: relative; display: inline-flex; align-items: center; gap: 4px; border: 0; background: none; padding: 0; color: #9ebdc8; font-size: 12px; font-weight: 600; text-decoration: none; }
 .hero-index { position: absolute; z-index: 4; bottom: 29px; left: 50%; display: flex; align-items: center; gap: 13px; color: rgba(255,255,255,.56); font-size: 9px; letter-spacing: .13em; transform: translateX(-50%); }
 .hero-index div { width: min(335px, 30vw); height: 1px; background: rgba(255,255,255,.25); }
 
@@ -133,7 +133,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .result-topline strong { color: #29434c; font-size: 11px; }
 .result-panel h4 { margin: 13px 0 6px; color: #2b383a; font-family: "Noto Serif", Georgia, serif; font-size: 19px; font-weight: 500; line-height: 1.28; }
 .result-panel p { margin: 0; color: #546365; font-size: 12px; line-height: 1.62; }
-.result-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; border: 0; background: transparent; padding: 0; color: #345762; font-size: 11px; font-weight: 700; }
+.result-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; border: 0; background: transparent; padding: 0; color: #345762; font-size: 11px; font-weight: 700; text-decoration: none; }
 
 .context-section { background: #171a1a; padding: 126px 0 132px; }
 .context-heading { display: grid; grid-template-columns: 1fr 1fr; gap: 39px 80px; align-items: start; padding-bottom: 29px; border-bottom: 1px solid rgba(188,207,212,.19); }
