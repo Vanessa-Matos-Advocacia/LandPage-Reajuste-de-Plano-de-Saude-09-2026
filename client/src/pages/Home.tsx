@@ -29,7 +29,7 @@ const publicAsset = (file: string) => `${import.meta.env.BASE_URL}assets/${file}
 const assets = {
   logo: publicAsset("vanessa-logo.png"),
   stackedLogo: publicAsset("vanessa-logo-stacked.png"),
-  officialSymbol: publicAsset("vanessa-symbol.svg"),
+  officialSymbol: publicAsset("vanessa-symbol.webp"),
   hero: publicAsset("vanessa-hero.jpeg"),
   data: publicAsset("vanessa-data.jpeg"),
   consult: publicAsset("vanessa-consult.png"),
