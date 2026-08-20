@@ -72,7 +72,16 @@ type TriageResult = {
   message: string;
 };
 
-const parseMoney = (value: string) => Number(value.replace(/[^0-9,.-]/g, "").replace(",", "."));
+const parseMoney = (value: string) => {
+  const cleaned = value.replace(/[^0-9,.-]/g, "");
+  const separatorIndex = Math.max(cleaned.lastIndexOf(","), cleaned.lastIndexOf("."));
+
+  if (separatorIndex < 0) return Number(cleaned.replace(/[^0-9]/g, ""));
+
+  const integerPart = cleaned.slice(0, separatorIndex).replace(/[.,]/g, "");
+  const decimalPart = cleaned.slice(separatorIndex + 1).replace(/[.,]/g, "");
+  return Number(`${integerPart}.${decimalPart}`);
+};
 
 const scrollTo = (id: string) => {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -90,12 +99,6 @@ export default function Home() {
 
   const formattedInitial = useMemo(() => parseMoney(mensalidadeInicial), [mensalidadeInicial]);
   const formattedCurrent = useMemo(() => parseMoney(mensalidadeAtual), [mensalidadeAtual]);
-
-  const openContactNotice = () => {
-    toast("Canal de atendimento em configuração", {
-      description: "O WhatsApp e os contatos oficiais do escritório serão inseridos antes da publicação.",
-    });
-  };
 
   const handleTriage = () => {
     if (!tipoPlano || !anoInicio || !formattedInitial || !formattedCurrent || !consent) {
@@ -147,7 +150,8 @@ export default function Home() {
   };
 
   return (
-    <main className="site-shell overflow-hidden bg-[#0a0b0b] text-white">
+    <main id="conteudo" className="site-shell overflow-hidden bg-[#0a0b0b] text-white">
+      <a className="skip-link" href="#inicio">Pular para o conteúdo principal</a>
       <header className="site-header">
         <div className="site-container flex items-center justify-between gap-5">
           <button
@@ -155,7 +159,7 @@ export default function Home() {
             aria-label="Voltar ao início"
             onClick={() => scrollTo("inicio")}
           >
-            <img className="brand-logo" src={assets.logo} alt="Vanessa Matos Advocacia" />
+            <img className="brand-logo" src={assets.stackedLogo} alt="Vanessa Matos Advocacia" />
             <img className="brand-seal" src={assets.headerSeal} alt="" aria-hidden="true" />
           </button>
 
@@ -165,8 +169,8 @@ export default function Home() {
             <button className="nav-link" onClick={() => scrollTo("duvidas")}>Dúvidas frequentes</button>
           </nav>
 
-          <button className="header-cta hidden sm:inline-flex" onClick={openContactNotice}>
-            Falar com a equipe <ArrowUpRightIcon />
+          <button className="header-cta hidden sm:inline-flex" onClick={() => scrollTo("triagem")}>
+            Fazer a triagem <ArrowUpRightIcon />
           </button>
           <button
             className="mobile-menu-button lg:hidden"
@@ -182,7 +186,7 @@ export default function Home() {
             <button onClick={() => { setMenuOpen(false); scrollTo("entenda"); }}>Entenda o cenário</button>
             <button onClick={() => { setMenuOpen(false); scrollTo("triagem"); }}>Faça a triagem</button>
             <button onClick={() => { setMenuOpen(false); scrollTo("duvidas"); }}>Dúvidas frequentes</button>
-            <button onClick={openContactNotice}>Falar com a equipe</button>
+            <button onClick={() => { setMenuOpen(false); scrollTo("triagem"); }}>Fazer a triagem</button>
           </nav>
         )}
       </header>
@@ -192,6 +196,10 @@ export default function Home() {
         <div className="hero-shade" aria-hidden="true" />
         <div className="site-container hero-grid relative z-10">
           <div className="hero-copy">
+            <div className="hero-brand-register">
+              <img src={assets.stackedLogo} alt="" aria-hidden="true" />
+              <span>Orientação jurídica informativa</span>
+            </div>
             <div className="eyebrow"><span />Direito à saúde · orientação estratégica</div>
             <h1>Seu plano ficou mais caro. <em>Antes de aceitar o aumento, entenda o que pode ser analisado.</em></h1>
             <p className="hero-intro">
@@ -201,17 +209,17 @@ export default function Home() {
               <button className="primary-button" onClick={() => scrollTo("triagem")}>
                 Verificar meu reajuste <ArrowRight size={17} />
               </button>
-              <button className="text-button" onClick={() => scrollTo("entenda")}>
-                Como funciona a análise <ArrowDownRight size={17} />
+              <button className="text-button" onClick={() => scrollTo("documentos")}>
+                Ver documentos úteis <ArrowDownRight size={17} />
               </button>
             </div>
           </div>
 
           <aside className="hero-note">
             <div className="note-symbol"><HeartPulse size={23} strokeWidth={1.45} /></div>
-            <p className="note-kicker">Uma conversa começa com clareza</p>
-            <p className="note-copy">Informação responsável pode ajudar você e sua família a tomar o próximo passo com mais segurança.</p>
-            <button onClick={openContactNotice} className="note-link">Solicitar orientação inicial <ChevronRight size={15} /></button>
+            <p className="note-kicker">Decisões importantes pedem contexto.</p>
+            <p className="note-copy">A primeira etapa é entender o histórico com calma, sem promessas e sem decisões automatizadas.</p>
+            <button onClick={() => scrollTo("triagem")} className="note-link">Começar pela triagem <ChevronRight size={15} /></button>
           </aside>
         </div>
         <div className="hero-index site-container" aria-hidden="true"><span>01</span><div /><span>REAJUSTE DE PLANO DE SAÚDE</span></div>
@@ -224,17 +232,17 @@ export default function Home() {
             <h2>Comece pelos dados que o seu contrato já revela.</h2>
             <p>Em poucos campos, você organiza o histórico básico da mensalidade. O resultado serve como referência preliminar para decidir se vale reunir documentos e buscar uma leitura individual.</p>
             <div className="triage-facts">
-              <span><Check size={16} /> Informação sem compromisso</span>
-              <span><Check size={16} /> Sem promessa de resultado</span>
               <span><Check size={16} /> Leitura preliminar e informativa</span>
+              <span><Check size={16} /> Sem promessa ou automatização de resultado</span>
+              <span><Check size={16} /> Valores calculados apenas no seu navegador</span>
             </div>
           </div>
 
           <div className="triage-card">
             <div className="triage-card-heading">
               <div>
-                <p className="card-label">Instrumento de orientação</p>
-                <h3>Triagem de reajuste</h3>
+                <p className="card-label">Instrumento de orientação preliminar</p>
+                <h3>Leitura inicial do reajuste</h3>
               </div>
               <img src={assets.officialSymbol} alt="" aria-hidden="true" />
             </div>
@@ -273,13 +281,14 @@ export default function Home() {
               Ver minha triagem <ArrowRight size={17} />
             </button>
             <p className="form-disclaimer">A estimativa considera apenas os valores e o período informados. Contrato, faixa etária, modalidade e comunicados da operadora podem alterar a avaliação.</p>
+            <p className="privacy-brief"><ShieldCheck size={13} /> Esta página não solicita dados identificáveis. Os valores permanecem no navegador durante a sua navegação.</p>
 
             {result && (
               <div className={`result-panel result-${result.tone}`} aria-live="polite">
                 <div className="result-topline"><span>Resultado de referência</span><strong>{result.annualRate ? `${result.annualRate.toFixed(1).replace(".", ",")}% a.a.` : "Histórico informado"}</strong></div>
                 <h4>{result.heading}</h4>
                 <p>{result.message}</p>
-                <button className="result-link" onClick={openContactNotice}>Organizar uma conversa com a equipe <ArrowRight size={15} /></button>
+                <button className="result-link" onClick={() => scrollTo("documentos")}>Ver documentos que ajudam na análise <ArrowRight size={15} /></button>
               </div>
             )}
           </div>
@@ -317,7 +326,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="evidence-section">
+      <section id="documentos" className="evidence-section">
         <div className="site-container evidence-layout">
           <div className="evidence-visual">
             <img src={assets.data} alt="Documentos e gráficos abstratos representando a análise de dados contratuais" />
@@ -325,8 +334,8 @@ export default function Home() {
           </div>
           <div className="evidence-copy">
             <div className="eyebrow eyebrow-dark"><span />Uma análise não começa com uma conclusão</div>
-            <h2>Começa com as perguntas certas.</h2>
-            <p>Uma orientação responsável observa como o plano foi contratado, quais foram os reajustes ao longo do tempo e de que modo os percentuais foram apresentados. É a combinação desses elementos que dá contexto ao caso.</p>
+            <h2>Começa com os documentos que dão contexto ao caso.</h2>
+            <p>Uma orientação responsável observa como o plano foi contratado, quais foram os reajustes ao longo do tempo e de que modo os percentuais foram apresentados. É a combinação desses elementos que dá contexto à leitura inicial.</p>
             <div className="evidence-list">
               <div><span>01</span><p><strong>Contrato e proposta de adesão</strong> para entender a modalidade e as cláusulas aplicáveis.</p></div>
               <div><span>02</span><p><strong>Boletos e comunicados de reajuste</strong> para mapear a evolução da mensalidade.</p></div>
@@ -345,7 +354,7 @@ export default function Home() {
           <div className="process-steps">
             <article><span>1</span><h3>Organize o histórico</h3><p>Reúna contrato, boletos e comunicações que ajudem a entender o aumento.</p></article>
             <article><span>2</span><h3>Faça a triagem</h3><p>Use a ferramenta acima para estruturar os valores e o tempo de contrato.</p></article>
-            <article><span>3</span><h3>Converse com a equipe</h3><p>Apresente os documentos para uma orientação inicial adequada à sua situação.</p></article>
+            <article><span>3</span><h3>Prepare a próxima conversa</h3><p>Com seu histórico organizado, você estará mais preparado para solicitar orientação individual pelos canais oficiais do escritório.</p></article>
           </div>
         </div>
       </section>
@@ -356,7 +365,7 @@ export default function Home() {
             <div className="section-number">05 <span>Perguntas frequentes</span></div>
             <h2>Informação para você decidir com mais clareza.</h2>
             <p>Reunimos dúvidas que costumam surgir antes de uma análise. Cada resposta é geral; os detalhes dependem do contrato e da situação vivida por cada família.</p>
-            <button className="text-button text-button-dark" onClick={openContactNotice}>Ainda tem uma dúvida? Fale com a equipe <ArrowRight size={16} /></button>
+            <button className="text-button text-button-dark" onClick={() => scrollTo("triagem")}>Revisar meus dados na triagem <ArrowRight size={16} /></button>
           </div>
           <Accordion type="single" collapsible className="faq-accordion">
             {faqs.map((faq, index) => (
@@ -375,10 +384,10 @@ export default function Home() {
         <div className="site-container closing-content relative z-10">
           <div className="closing-symbol"><Sparkles size={18} strokeWidth={1.2} /> Vanessa Matos Advocacia</div>
           <h2>Seu caso merece ser compreendido antes de qualquer decisão.</h2>
-          <p>Organize suas informações, entenda os pontos que podem ser avaliados e, quando estiver pronto, fale com uma equipe que une escuta, rigor técnico e comunicação clara.</p>
+          <p>Organize suas informações, entenda os pontos que podem ser avaliados e prepare seu histórico para uma conversa jurídica individual, quando decidir avançar.</p>
           <div className="hero-actions">
-            <button className="primary-button primary-button-light" onClick={openContactNotice}>Solicitar orientação inicial <ArrowRight size={17} /></button>
-            <button className="text-button text-button-light" onClick={() => scrollTo("triagem")}>Refazer a triagem <ArrowUpRightIcon /></button>
+            <button className="primary-button primary-button-light" onClick={() => scrollTo("documentos")}>Organizar documentos <ArrowRight size={17} /></button>
+            <button className="text-button text-button-light" onClick={() => scrollTo("triagem")}>Fazer a triagem <ArrowUpRightIcon /></button>
           </div>
         </div>
       </section>
@@ -390,13 +399,13 @@ export default function Home() {
             <p>Direito à saúde com escuta, precisão e orientação estratégica.</p>
           </div>
           <div className="footer-note">
-            <p className="footer-label">ATENDIMENTO</p>
-            <p>Os canais oficiais de WhatsApp, telefone, e-mail e endereço serão configurados antes da publicação.</p>
+            <p className="footer-label">PRIVACIDADE DA TRIAGEM</p>
+            <p>Esta página não solicita dados identificáveis na triagem. Os valores inseridos servem apenas para produzir a referência apresentada na própria tela.</p>
           </div>
           <div className="footer-links">
             <button onClick={() => scrollTo("inicio")}>Início</button>
             <button onClick={() => scrollTo("triagem")}>Triagem</button>
-            <button onClick={() => scrollTo("duvidas")}>Dúvidas</button>
+            <button onClick={() => scrollTo("documentos")}>Documentos</button>
           </div>
         </div>
         <div className="site-container footer-bottom"><span>© {currentYear} Vanessa Matos Advocacia. Todos os direitos reservados.</span><span>Conteúdo informativo · análise individual necessária.</span></div>
